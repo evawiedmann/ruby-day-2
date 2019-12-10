@@ -4,6 +4,7 @@ class NumberInput
   def initialize(number)
     @number = number
     @minus_one = {
+      '0' => '',
       '1'=>'one',
       '2'=>'two',
       '3'=>'three',
@@ -15,6 +16,7 @@ class NumberInput
       '9'=>'nine'
     }
     @minus_two = {
+      '0' => '',
       '1'=>'other',
       '2'=>'twenty',
       '3'=>'thirty',
@@ -26,6 +28,7 @@ class NumberInput
       '9'=>'ninety'
     }
     @divisible_three = {
+      '0' => '',
       '1'=>'one hundred ',
       '2'=>'two hundred ',
       '3'=>'three hundred ',
@@ -37,6 +40,7 @@ class NumberInput
       '9'=>'nine hundred '
     }
     @teens = {
+      '0' => ' ten ',
       '1'=>'eleven',
       '2'=>'twelve',
       '3'=>'thirteen',
@@ -74,31 +78,37 @@ elsif length_number === 5 || length_number === 6
   words_array.insert(2," thousand ")
 elsif length_number === 7
   words_array.insert(1," million ")
-  words_array.insert(5," thousand ")
+  words_array.insert(4," thousand ")
 elsif length_number === 8
   if @number.chars[0] == '1'
     words_array.insert(1," million ")
-    words_array.insert(4," thousand ")
+    words_array.insert(5," thousand ")
   else
   words_array.insert(2," million ")
-  words_array.insert(5," thousand ")
+  words_array.insert(6," thousand ")
   end
 elsif length_number === 9
   words_array.insert(3," million ")
-  words_array.insert(7," thousand ")
+  words_array.insert(6," thousand ")
 
 elsif length_number === 10
   words_array.insert(1," billion ")
   words_array.insert(5," million ")
-  words_array.insert(8," thousand ")
+  words_array.insert(9," thousand ")
 elsif length_number === 11
   words_array.insert(2," billion ")
   words_array.insert(5," million ")
   words_array.insert(9," thousand ")
 elsif length_number === 12
+  if @number.chars[0] == '1'
+    words_array.insert(2," billion ")
+    words_array.insert(6," million ")
+    words_array.insert(10," thousand ")
+  else
   words_array.insert(2," billion ")
   words_array.insert(6," million ")
   words_array.insert(10," thousand ")
+end
 elsif length_number === 13
   words_array.insert(1, ' trillion ')
   words_array.insert(5," billion ")
