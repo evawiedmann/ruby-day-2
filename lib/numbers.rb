@@ -99,6 +99,7 @@ elsif length_number === 11
   words_array.insert(2," billion ")
   words_array.insert(5," million ")
   words_array.insert(9," thousand ")
+# almost positive everything works up to this point
 elsif length_number === 12
   if @number.chars[0] == '1'
     words_array.insert(2," billion ")
