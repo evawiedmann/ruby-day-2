@@ -4,7 +4,7 @@ class NumberInput
   def initialize(number)
     @number = number
     @minus_one = {
-      '0' => '',
+      '0' => '!',
       '1'=>'one',
       '2'=>'two',
       '3'=>'three',
@@ -16,7 +16,7 @@ class NumberInput
       '9'=>'nine'
     }
     @minus_two = {
-      '0' => '',
+      '0' => '?',
       '1'=>'other',
       '2'=>'twenty',
       '3'=>'thirty',
@@ -28,7 +28,7 @@ class NumberInput
       '9'=>'ninety'
     }
     @divisible_three = {
-      '0' => '',
+      '0' => '.',
       '1'=>'one hundred ',
       '2'=>'two hundred ',
       '3'=>'three hundred ',
@@ -57,66 +57,67 @@ class NumberInput
     words_array = []
     number_array = @number.chars()
     while number_array.length > 0
-    if (number_array.length - 1) % 3 == 0 || number_array.length - 1 == 0
-      words_array.push(@minus_one.fetch(number_array[0]))
-    elsif (number_array.length - 2) % 3 == 0 || number_array.length - 2 == 0
-      if number_array[0] === '1'
-        number_array.shift
-        words_array.push(@teens.fetch(number_array[0]))
-      else
-        words_array.push(@minus_two.fetch(number_array[0]))
+      if (number_array.length - 1) % 3 == 0 || number_array.length - 1 == 0
+        words_array.push(@minus_one.fetch(number_array[0]))
+      elsif (number_array.length - 2) % 3 == 0 || number_array.length - 2 == 0
+        if number_array[0] === '1'
+          number_array.shift
+          words_array.push(@teens.fetch(number_array[0]))
+        else
+          words_array.push(@minus_two.fetch(number_array[0]))
+        end
+      elsif number_array.length % 3 == 0
+        words_array.push(@divisible_three.fetch(number_array[0]))
       end
-    elsif number_array.length % 3 == 0
-      words_array.push(@divisible_three.fetch(number_array[0]))
+      number_array.shift
     end
-    number_array.shift
-  end
-  length_number = @number.chars().length
-if length_number === 4
-  words_array.insert(1," thousand ")
-elsif length_number === 5 || length_number === 6
-  words_array.insert(2," thousand ")
-elsif length_number === 7
-  words_array.insert(1," million ")
-  words_array.insert(4," thousand ")
-elsif length_number === 8
-  if @number.chars[0] == '1'
-    words_array.insert(1," million ")
-    words_array.insert(5," thousand ")
-  else
-  words_array.insert(2," million ")
-  words_array.insert(6," thousand ")
-  end
-elsif length_number === 9
-  words_array.insert(3," million ")
-  words_array.insert(6," thousand ")
 
-elsif length_number === 10
-  words_array.insert(1," billion ")
-  words_array.insert(5," million ")
-  words_array.insert(9," thousand ")
-elsif length_number === 11
-  words_array.insert(2," billion ")
-  words_array.insert(5," million ")
-  words_array.insert(9," thousand ")
-# almost positive everything works up to this point
-elsif length_number === 12
-  if @number.chars[0] == '1'
-    words_array.insert(2," billion ")
-    words_array.insert(6," million ")
-    words_array.insert(10," thousand ")
-  else
-  words_array.insert(2," billion ")
-  words_array.insert(6," million ")
-  words_array.insert(10," thousand ")
-end
-elsif length_number === 13
-  words_array.insert(1, ' trillion ')
-  words_array.insert(5," billion ")
-  words_array.insert(8," million ")
-  words_array.insert(12," thousand ")
-end
-result = words_array.join()
+    length_number = @number.chars().length
+    if length_number === 4
+      words_array.insert(1," thousand ")
+    elsif length_number === 5 || length_number === 6
+      words_array.insert(2," thousand ")
+    elsif length_number === 7
+      words_array.insert(1," million ")
+      words_array.insert(4," thousand ")
+    elsif length_number === 8
+      if @number.chars[0] == '1'
+        words_array.insert(1," million ")
+        words_array.insert(5," thousand ")
+      else
+        words_array.insert(2," million ")
+        words_array.insert(6," thousand ")
+      end
+    elsif length_number === 9
+      words_array.insert(3," million ")
+      words_array.insert(6," thousand ")
+
+    elsif length_number === 10
+      words_array.insert(1," billion ")
+      words_array.insert(5," million ")
+      words_array.insert(9," thousand ")
+    elsif length_number === 11
+      words_array.insert(2," billion ")
+      words_array.insert(5," million ")
+      words_array.insert(9," thousand ")
+      # almost positive everything works up to this point
+    elsif length_number === 12
+      if @number.chars[0] == '1'
+        words_array.insert(2," billion ")
+        words_array.insert(6," million ")
+        words_array.insert(10," thousand ")
+      else
+        words_array.insert(2," billion ")
+        words_array.insert(6," million ")
+        words_array.insert(10," thousand ")
+      end
+    elsif length_number === 13
+      words_array.insert(1, ' trillion ')
+      words_array.insert(5," billion ")
+      words_array.insert(9," million ")
+      words_array.insert(13," thousand ")
+    end
+    result = words_array.join()
 
   end
 end
